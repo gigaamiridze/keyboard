@@ -47,6 +47,21 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+
+  // Element Styles
+  body {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 50px;
+  }
 `;
 
 export default GlobalStyles;
