@@ -57,7 +57,7 @@ function App() {
       <GlobalStyles />
       <Textarea value={output} readOnly />
       <Keyboard 
-        mode='qwerty'
+        mode='qwerty-numpad'
         styles={keyboardStyles}
         onKeyPress={(output) => setOutput(output)} 
       />

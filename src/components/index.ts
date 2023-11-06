@@ -1,4 +1,5 @@
 export { default as KeyboardContainer } from './KeyboardContainer';
+export { default as LayoutWrapper } from './LayoutWrapper';
 export { default as KeyButton } from './KeyButton';
 export { default as Textarea } from './Textarea';
 export { default as Row } from './Row';

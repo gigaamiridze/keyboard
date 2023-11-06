@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 const KeyboardContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 5px;
+  align-items: flex-start;
+  column-gap: 20px;
 `;
 
 export default KeyboardContainer;

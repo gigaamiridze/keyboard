@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IKeyboardProps } from '../interfaces';
-import { KeyboardContainer, KeyButton, Row, DeleteIcon, GlobeIcon, UpIcon } from '../components';
+import { KeyboardContainer, LayoutWrapper, KeyButton, Row, DeleteIcon, GlobeIcon, UpIcon } from '../components';
 
 const qwertyLayout: string[][] = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
@@ -16,10 +16,18 @@ const symbolLayout: string[][] = [
   ['123/#+=', 'ქარ', ' ', 'გაწმენდა', 'წაშლა']
 ];
 
-function Keyboard({ styles, onKeyPress }: IKeyboardProps) {
+const numpadLayout: string[][] = [
+  ['1', '2', '3'],
+  ['4', '5', '6'],
+  ['7', '8', '9'],
+  ['0'],
+];
+
+function Keyboard(props: IKeyboardProps) {
   const [input, setInput] = useState<string>('');
   const [isShiftActive, setShiftActive] = useState<boolean>(false);
   const [isSymbolLayout, setSymbolLayout] = useState<boolean>(false);
+  const { mode, styles, onKeyPress } = props;
 
   const handleKeyPress = (key: string) => {
     let updatedInput = input;
@@ -58,31 +66,52 @@ function Keyboard({ styles, onKeyPress }: IKeyboardProps) {
 
   return (
     <KeyboardContainer>
-      {layoutToUse.map((row, rowIndex) => (
-        <Row key={rowIndex}>
-          {row.map((key, keyIndex) => (
-            <KeyButton
-              key={keyIndex}
-              styles={styles}
-              isSymbolActive={isSymbolLayout}
-              isShiftActive={isShiftActive}
-              isShift={key === 'Shift'}
-              isSymbol={key === '123/#+='}
-              isLanguage={key === 'ქარ'}
-              isSpace={key === ' '}
-              isClean={key === 'გაწმენდა'}
-              isDelete={key === 'წაშლა'}
-              isUppercase={isShiftActive && /^[a-z]$/.test(key)}
-              onClick={() => handleKeyPress(key)}
-            >
-              {key === 'Shift' && <UpIcon />}
-              {key === 'ქარ' && <GlobeIcon />}
-              {key === 'წაშლა' && <DeleteIcon />}
-              {key}
-            </KeyButton>
+      {mode === 'qwerty' || mode === 'qwerty-numpad' ? (
+        <LayoutWrapper>
+          {layoutToUse.map((row, rowIndex) => (
+            <Row key={rowIndex}>
+              {row.map((key, keyIndex) => (
+                <KeyButton
+                  key={keyIndex}
+                  styles={styles}
+                  isSymbolActive={isSymbolLayout}
+                  isShiftActive={isShiftActive}
+                  isShift={key === 'Shift'}
+                  isSymbol={key === '123/#+='}
+                  isLanguage={key === 'ქარ'}
+                  isSpace={key === ' '}
+                  isClean={key === 'გაწმენდა'}
+                  isDelete={key === 'წაშლა'}
+                  isUppercase={isShiftActive && /^[a-z]$/.test(key)}
+                  onClick={() => handleKeyPress(key)}
+                >
+                  {key === 'Shift' && <UpIcon />}
+                  {key === 'ქარ' && <GlobeIcon />}
+                  {key === 'წაშლა' && <DeleteIcon />}
+                  {key}
+                </KeyButton>
+              ))}
+            </Row>
           ))}
-        </Row>
-      ))}
+        </LayoutWrapper>
+      ) : null}
+      {mode === 'qwerty-numpad' && (
+        <LayoutWrapper>
+          {numpadLayout.map((row, rowIndex) => (
+            <Row key={rowIndex}>
+              {row.map((key, keyIndex) => (
+                <KeyButton
+                  key={keyIndex}
+                  styles={styles}
+                  onClick={() => handleKeyPress(key)}
+                >
+                  {key}
+                </KeyButton>
+              ))}
+            </Row>
+          ))}
+        </LayoutWrapper>
+      )}
     </KeyboardContainer>
   )
 }
