@@ -2,18 +2,34 @@ import { useState } from 'react';
 import { IKeyboardProps } from '../interfaces';
 import { KeyboardContainer, LayoutWrapper, KeyButton, Row, DeleteIcon, GlobeIcon, UpIcon } from '../components';
 
-const qwertyLayout: string[][] = [
+const englishLayout: string[][] = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Shift'],
-  ['123/#+=', 'ქარ', ' ', 'გაწმენდა', 'წაშლა']
+  ['123/#+=', 'ქარ', ' ', 'Clean', 'Delete']
 ];
 
-const symbolLayout: string[][] = [
+const georgianLayout: any[][] = [
+  ['ქ', ['წ', 'ჭ'], 'ე', ['რ', 'ღ'], ['ტ', 'თ'], 'ყ', 'უ', 'ი', 'ო', 'პ'],
+  ['ა', ['ს', 'შ'], 'დ', 'ფ', 'გ', 'ჰ', ['ჯ', 'ჭ'], 'კ', 'ლ'],
+  ['Shift', ['ზ', 'ძ'], 'ხ', ['ც', 'ჩ'], 'ვ', 'ბ', 'ნ', 'მ', 'Shift'],
+  ['123/#+=', 'Eng', ' ', 'გაწმენდა', 'წაშლა']
+];
+
+const commonSymbolLayout: string[][] = [
   ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
   ['#', '$', '%', '!', '&', '@', '*', '/', '\\'],
-  ['Shift', '+', '-', '=', '"', '_', ',', '.', 'Shift'],
-  ['123/#+=', 'ქარ', ' ', 'გაწმენდა', 'წაშლა']
+  ['Shift', '+', '-', '=', '"', '_', ',', '.', 'Shift']
+];
+
+const symbolLayoutEn: string[][] = [
+  ...commonSymbolLayout,
+  ['123/#+=', 'ქარ', ' ', 'Clean', 'Delete']
+];
+
+const symbolLayoutGe: string[][] = [
+  ...commonSymbolLayout,
+  ['123/#+=', 'Eng', ' ', 'გაწმენდა', 'წაშლა']
 ];
 
 const numpadLayout: string[][] = [
@@ -34,6 +50,7 @@ function Keyboard(props: IKeyboardProps) {
   const [input, setInput] = useState<string>('');
   const [isShiftActive, setShiftActive] = useState<boolean>(false);
   const [isSymbolLayout, setSymbolLayout] = useState<boolean>(false);
+  const [currentLanguage, setCurrentLanguage] = useState<string>('en');
   const { mode, styles, onKeyPress } = props;
 
   const handleKeyPress = (key: string) => {
@@ -50,16 +67,20 @@ function Keyboard(props: IKeyboardProps) {
         updatedInput += ' ';
         break;
       case 'გაწმენდა':
+      case 'Clean':
         if (updatedInput.length > 0) {
           updatedInput = '';
         }
         break;
       case 'წაშლა':
+      case 'Delete':
         if (updatedInput.length > 0) {
           updatedInput = updatedInput.slice(0, -1);
         }
         break;
       case 'ქარ':
+      case 'Eng':
+        setCurrentLanguage(currentLanguage === 'en' ? 'ka' : 'en');
         break;
       default:
         updatedInput += isShiftActive ? key.toUpperCase() : key;
@@ -69,7 +90,8 @@ function Keyboard(props: IKeyboardProps) {
     onKeyPress(updatedInput);
   };
 
-  const layoutToUse = isSymbolLayout ? symbolLayout : qwertyLayout;
+  const symbolLayoutToUse = currentLanguage === 'en' ? symbolLayoutEn : symbolLayoutGe;
+  const layoutToUse = isSymbolLayout ? symbolLayoutToUse : (currentLanguage === 'en' ? englishLayout : georgianLayout);
 
   return (
     <KeyboardContainer>
@@ -77,27 +99,36 @@ function Keyboard(props: IKeyboardProps) {
         <LayoutWrapper>
           {layoutToUse.map((row, rowIndex) => (
             <Row key={rowIndex}>
-              {row.map((key, keyIndex) => (
-                <KeyButton
-                  key={keyIndex}
-                  styles={styles}
-                  isSymbolActive={isSymbolLayout}
-                  isShiftActive={isShiftActive}
-                  isShift={key === 'Shift'}
-                  isSymbol={key === '123/#+='}
-                  isLanguage={key === 'ქარ'}
-                  isSpace={key === ' '}
-                  isClean={key === 'გაწმენდა'}
-                  isDelete={key === 'წაშლა'}
-                  isUppercase={isShiftActive && /^[a-z]$/.test(key)}
-                  onClick={() => handleKeyPress(key)}
-                >
-                  {key === 'Shift' && <UpIcon />}
-                  {key === 'ქარ' && <GlobeIcon />}
-                  {key === 'წაშლა' && <DeleteIcon />}
-                  {key}
-                </KeyButton>
-              ))}
+              {row.map((key, keyIndex) => {
+                let keyToRender: string;
+                if (Array.isArray(key)) {
+                  keyToRender = isShiftActive && currentLanguage === 'ka' ? key[1] : key[0];
+                } else {
+                  keyToRender = key;
+                }
+
+                return (
+                  <KeyButton
+                    key={keyIndex}
+                    styles={styles}
+                    isSymbolActive={isSymbolLayout}
+                    isShiftActive={isShiftActive}
+                    isShift={key === 'Shift'}
+                    isSymbol={key === '123/#+='}
+                    isLanguage={key === 'ქარ' || key === 'Eng'}
+                    isSpace={key === ' '}
+                    isClean={key === 'გაწმენდა' || key === 'Clean'}
+                    isDelete={key === 'წაშლა' || key === 'Delete'}
+                    isUppercase={isShiftActive && /^[a-z]$/.test(key)}
+                    onClick={() => handleKeyPress(keyToRender)}
+                  >
+                    {key === 'Shift' && <UpIcon />}
+                    {key === 'ქარ' || key === 'Eng' ? <GlobeIcon /> : null}
+                    {key === 'წაშლა' || key === 'Delete' ? <DeleteIcon /> : null}
+                    {keyToRender}
+                  </KeyButton>
+                )
+              })}
             </Row>
           ))}
         </LayoutWrapper>

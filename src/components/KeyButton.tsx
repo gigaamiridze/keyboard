@@ -11,7 +11,7 @@ const KeyButton = styled.button<IKeyButtonProps>`
     font-weight: ${styles?.keyButton.default.fontWeight};
     font-size: ${styles?.keyButton.default.fontSize}px;
     border-radius: ${styles?.keyButton.default.borderRadius}px;
-    text-transform: ${isUppercase ? 'uppercase' : 'lowercase'};
+    text-transform: ${isUppercase && 'uppercase'};
 
     ${isShift && css`
       width: ${styles?.keyButton.shift?.width}px;
