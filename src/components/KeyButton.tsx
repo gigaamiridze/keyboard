@@ -72,7 +72,7 @@ const KeyButton = styled.button<IKeyButtonProps>`
   }
 
   svg {
-    fill: ${({ styles }) => styles?.keyButton.shift?.color};
+    fill: ${({ styles }) => styles?.keyButton.delete?.color};
   }
 `;
 

@@ -23,6 +23,13 @@ const numpadLayout: string[][] = [
   ['0'],
 ];
 
+const numericLayout: string[][] = [
+  ['1', '2', '3'],
+  ['4', '5', '6'],
+  ['7', '8', '9'],
+  ['.', '0', 'წაშლა'],
+];
+
 function Keyboard(props: IKeyboardProps) {
   const [input, setInput] = useState<string>('');
   const [isShiftActive, setShiftActive] = useState<boolean>(false);
@@ -105,6 +112,25 @@ function Keyboard(props: IKeyboardProps) {
                   styles={styles}
                   onClick={() => handleKeyPress(key)}
                 >
+                  {key}
+                </KeyButton>
+              ))}
+            </Row>
+          ))}
+        </LayoutWrapper>
+      )}
+      {mode === 'numeric' && (
+        <LayoutWrapper>
+          {numericLayout.map((row, rowIndex) => (
+            <Row key={rowIndex}>
+              {row.map((key, keyIndex) => (
+                <KeyButton
+                  key={keyIndex}
+                  styles={styles}
+                  isDelete={key === 'წაშლა'}
+                  onClick={() => handleKeyPress(key)}
+                >
+                  {key === 'წაშლა' && <DeleteIcon />}
                   {key}
                 </KeyButton>
               ))}
