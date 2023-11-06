@@ -100,7 +100,11 @@ function Keyboard(props: IKeyboardProps) {
           {layoutToUse.map((row, rowIndex) => (
             <Row key={rowIndex}>
               {row.map((key, keyIndex) => {
+                const isLanguage = key === 'ქარ' || key === 'Eng';
+                const isClean = key === 'გაწმენდა' || key === 'Clean';
+                const isDelete = key === 'წაშლა' || key === 'Delete';
                 let keyToRender: string;
+
                 if (Array.isArray(key)) {
                   keyToRender = isShiftActive && currentLanguage === 'ka' ? key[1] : key[0];
                 } else {
@@ -115,16 +119,16 @@ function Keyboard(props: IKeyboardProps) {
                     isShiftActive={isShiftActive}
                     isShift={key === 'Shift'}
                     isSymbol={key === '123/#+='}
-                    isLanguage={key === 'ქარ' || key === 'Eng'}
+                    isLanguage={isLanguage}
                     isSpace={key === ' '}
-                    isClean={key === 'გაწმენდა' || key === 'Clean'}
-                    isDelete={key === 'წაშლა' || key === 'Delete'}
+                    isClean={isClean}
+                    isDelete={isDelete}
                     isUppercase={isShiftActive && /^[a-z]$/.test(key)}
                     onClick={() => handleKeyPress(keyToRender)}
                   >
                     {key === 'Shift' && <UpIcon />}
-                    {key === 'ქარ' || key === 'Eng' ? <GlobeIcon /> : null}
-                    {key === 'წაშლა' || key === 'Delete' ? <DeleteIcon /> : null}
+                    {isLanguage ? <GlobeIcon /> : null}
+                    {isDelete ? <DeleteIcon /> : null}
                     {keyToRender}
                   </KeyButton>
                 )
