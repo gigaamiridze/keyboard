@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { FlexBox } from '../components';
 import { useKeyboardLayout } from '../hooks';
-import { IKeyboardProps, IActionProps, IQwertyHookProps } from '../interfaces';
 import { QwertyKeyboard, NumpadKeyboard, NumericKeyboard } from '../components';
+import { IKeyboardProps, IActionProps, IQwertyKeyboardHookProps } from '../interfaces';
 
 interface IKeyboardLayoutProps extends IKeyboardProps {
   actionProps: IActionProps;
@@ -29,7 +29,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onKeyPress(input);
   }, [input]);
 
-  const qwertyHookOptions: IQwertyHookProps = {
+  const qwertyKeyboardHookOptions: IQwertyKeyboardHookProps = {
     currentLayout,
     selectedLanguage,
     isShiftActive,
@@ -48,7 +48,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
       {mode === 'qwerty' || mode === 'qwerty-numpad' ? (
         <QwertyKeyboard 
           actionProps={actionProps}
-          hookOptions={qwertyHookOptions}
+          hookOptions={qwertyKeyboardHookOptions}
           styles={styles}
         />
       ) : null}
