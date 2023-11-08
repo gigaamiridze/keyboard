@@ -1,12 +1,45 @@
-export interface IKeyboardProps {
+import { Language } from '../constants';
+import { IButton } from '../interfaces';
+
+interface IKeyboardCommonProps {
   mode: 'numeric' | 'qwerty' | 'qwerty-numpad';
-  styles?: IKeyboardStyles;
   onKeyPress: (input: string) => void;
 }
 
+export interface IKeyboardTemplateProps extends IKeyboardCommonProps {
+  styleType: 'tbc' | 'wissol';
+}
+
+export interface IKeyboardProps extends IKeyboardCommonProps {
+  styles?: IKeyboardStyles;
+}
+
+export interface IQwertyKeyboardHookProps {
+  currentLayout: IButton[][];
+  selectedLanguage: Language;
+  isShiftActive: boolean;
+  isSymbolActive: boolean;
+  setInput: (value: string) => void;
+  onShift: () => void;
+  onSymbol: () => void;
+  onLanguageChange: () => void;
+  onSpace: () => void;
+  onClean: () => void;
+  onDelete: () => void;
+}
+
 export interface IKeyboardStyles {
+  keyboardInput: {
+    width: number;
+    fontSize: number;
+    color: string;
+    borderColor: string;
+    borderWidth: number;
+    leftIcon?: JSX.Element;
+    rightIcon?: JSX.Element;
+  },
   keyButton: {
-    default: {
+    regular: {
       width?: number;
       height?: number;
       backgroundColor?: string;
@@ -15,35 +48,19 @@ export interface IKeyboardStyles {
       fontWeight?: number;
       borderRadius?: number;
     },
-    shift?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    },
-    symbol?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    },
-    language?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    },
-    space?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    },
-    clean?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    },
-    delete?: {
-      width?: number;
-      backgroundColor?: string;
-      color?: string;
-    }
+    shift?: IActionButtonStyles;
+    symbol?: IActionButtonStyles;
+    language?: IActionButtonStyles;
+    space?: IActionButtonStyles;
+    clean?: IActionButtonStyles;
+    delete?: IActionButtonStyles;
   }
+}
+
+interface IActionButtonStyles {
+  width?: number;
+  backgroundColor?: string;
+  color?: string;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
 }

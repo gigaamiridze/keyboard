@@ -1,8 +1,10 @@
-export { default as KeyboardContainer } from './KeyboardContainer';
-export { default as LayoutWrapper } from './LayoutWrapper';
-export { default as KeyButton } from './KeyButton';
-export { default as Textarea } from './Textarea';
-export { default as Row } from './Row';
-export { default as DeleteIcon } from './DeleteIcon';
-export { default as GlobeIcon } from './GlobeIcon';
-export { default as UpIcon } from './UpIcon';
+export { default as KeyboardWrapper } from './KeyboardWrapper';
+export { default as NumericKeyboard } from './NumericKeyboard';
+export { default as KeyboardLayout } from './KeyboardLayout';
+export { default as QwertyKeyboard } from './QwertyKeyboard';
+export { default as NumpadKeyboard } from './NumpadKeyboard';
+export { default as KeyboardInput } from './KeyboardInput';
+export { default as RegularButton } from './RegularButton';
+export { default as ActionButton } from './ActionButton';
+export { default as Icon } from './Icon';
+export * from './StyledComponents';
