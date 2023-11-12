@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { IKeyboardStyles, IActionProps, IQwertyKeyboardHookProps } from '../interfaces';
 import { getLabel, languageLabel, cleanLabel, deleteLabel } from '../utils';
 import { ActionButton, RegularButton, FlexBox } from '../components';
@@ -36,10 +37,10 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
           columnGap={5}
         >
           {row.map((key, keyIndex) => (
-            <>
+            <Fragment key={keyIndex}>
               {rowIndex === 2 && hasShift && keyIndex === 0 && (
                 <ActionButton 
-                  key={`${rowIndex}-${keyIndex}`} 
+                  key={rowIndex} 
                   label='Shift' 
                   type={ActionButtonType.SHIFT}
                   styles={styles}
@@ -59,7 +60,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
               />
               {rowIndex === 2 && hasShift && keyIndex === row.length - 1 && (
                 <ActionButton 
-                  key={`${rowIndex}-${keyIndex}`} 
+                  key={rowIndex} 
                   label='Shift'
                   type={ActionButtonType.SHIFT}
                   styles={styles}
@@ -69,7 +70,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                   onClick={onShift} 
                 />
               )}
-            </>
+            </Fragment>
           ))}
         </FlexBox>
       ))}

@@ -29,7 +29,7 @@ function Icon(props: IconProps) {
           color={color}
           fill={color}
         >
-          <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M12 21a9 9 0 1 0 0-18m0 18a9 9 0 1 1 0-18m0 18c2.761 0 3.941-5.163 3.941-9c0-3.837-1.18-9-3.941-9m0 18c-2.761 0-3.941-5.163-3.941-9c0-3.837 1.18-9 3.941-9M3.5 9h17m-17 6h17' />
+          <path fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M12 21a9 9 0 1 0 0-18m0 18a9 9 0 1 1 0-18m0 18c2.761 0 3.941-5.163 3.941-9c0-3.837-1.18-9-3.941-9m0 18c-2.761 0-3.941-5.163-3.941-9c0-3.837 1.18-9 3.941-9M3.5 9h17m-17 6h17' />
         </svg>
       )}
       {type === 'backspace' && (
@@ -41,9 +41,9 @@ function Icon(props: IconProps) {
           fill={color}
         >
           <path
-            fill-rule='evenodd'
+            fillRule='evenodd'
             d='M8.406 5.2a3.5 3.5 0 0 0-2.753 1.338l-3.561 4.535a1.5 1.5 0 0 0 0 1.853l3.561 4.536A3.5 3.5 0 0 0 8.406 18.8h10.647a2.5 2.5 0 0 0 2.5-2.5V7.7a2.5 2.5 0 0 0-2.5-2.5H8.406Zm2.064 3.27a.75.75 0 0 1 1.06 0L14 10.94l2.47-2.47a.75.75 0 1 1 1.06 1.06L15.06 12l2.47 2.47a.75.75 0 0 1-1.06 1.06L14 13.06l-2.47 2.47a.75.75 0 1 1-1.06-1.06L12.94 12l-2.47-2.47a.75.75 0 0 1 0-1.06Z'
-            clip-rule='evenodd'
+            clipRule='evenodd'
           />
         </svg>
       )}
