@@ -18,7 +18,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onClean, 
     onDelete 
   } = useKeyboardLayout();
-  const { mode, styles, actionProps, onKeyPress } = props;
+  const { mode, styles, actionProps, inputMaxLength, onKeyPress } = props;
   
   useEffect(() => {
     onKeyPress(input);
@@ -57,6 +57,9 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
         <NumericKeyboard 
           styles={styles}
           actionProps={actionProps}
+          input={input}
+          inputMaxLength={inputMaxLength}
+          isNumericMode={mode === 'numeric'}
           selectedLanguage={selectedLanguage}
           setInput={setInput}
           onDelete={onDelete}

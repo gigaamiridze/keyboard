@@ -10,6 +10,7 @@ export interface IButton {
 
 export interface IButtonProps extends IKeyboardStylesProp {
   type?: ActionButtonType;
+  isNumericMode?: boolean;
   isNumericDotMode?: boolean;
   isActive?: boolean;
 }
@@ -21,11 +22,13 @@ export interface IActionButtonProps extends IKeyboardStylesProp {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   isActive?: boolean;
+  isNumericMode?: boolean;
   onPress: () => void;
 }
 
 export interface IRegularButtonProps extends IKeyboardStylesProp {
 	keyOptions: IButton;
+  disabled?: boolean;
   isShiftActive?: boolean;
   isSymbolActive?: boolean;
 	onPress: (value: string) => void;

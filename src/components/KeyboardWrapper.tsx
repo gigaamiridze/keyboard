@@ -3,7 +3,7 @@ import { IKeyboardProps, IActionProps } from '../models';
 import { KeyboardLayout } from '../components';
 
 function KeyboardWrapper(props: IKeyboardProps) {
-  const { mode, styles, onKeyPress } = props;
+  const { mode, styles, inputMaxLength, onKeyPress } = props;
   let actionProps: IActionProps = disabledActions;
 
   if (mode === 'qwerty' || mode === 'qwerty-numpad') {
@@ -19,6 +19,7 @@ function KeyboardWrapper(props: IKeyboardProps) {
       mode={mode}
       styles={styles}
       actionProps={actionProps}
+      inputMaxLength={inputMaxLength}
       onKeyPress={onKeyPress}
     />
   )

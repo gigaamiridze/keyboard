@@ -13,6 +13,7 @@ function App() {
       <KeyboardWithInput 
         mode='numeric'
         styles={keyboardStyles}
+        inputMaxLength={3}
         onKeyPress={(value) => setOutput(value)}
       />
     </StyleSheetManager>

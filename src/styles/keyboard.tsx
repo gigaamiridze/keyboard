@@ -18,6 +18,7 @@ export const keyboardStyles: IKeyboardStyles = {
     fontSize: 22,
     fontFamily: '"Noto Sans Georgian", sans-serif',
     fontWeight: 600,
+    disabledColor: Colors.GRAY,
     pressedBgColor: Colors.GRAY,
     pressedTitleColor: Colors.LIGHT_BLUE,
     regular: {
@@ -57,7 +58,7 @@ export const keyboardStyles: IKeyboardStyles = {
       color: Colors.LIGHT_BLUE,
     },
     delete: {
-      width: 145,
+      width: 100,
       backgroundColor: Colors.LIGHT_BLUE,
       color: Colors.WHITE,
       leftIcon: <Icon type='backspace' size={25} color={Colors.WHITE} />,

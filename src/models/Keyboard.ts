@@ -12,6 +12,7 @@ export interface IKeyboardState {
 export interface IKeyboardProps extends IKeyboardStylesProp {
   mode: 'numeric' | 'numeric-dot' | 'qwerty' | 'qwerty-numpad';
   onKeyPress: (value: string) => void;
+  inputMaxLength?: number; 
 }
 
 export interface IKeyboardLayoutProps extends IKeyboardProps {
@@ -25,6 +26,9 @@ export interface IKeyboardInputProps extends IKeyboardStylesProp {
 export interface INumericKeyboardProps extends IKeyboardStylesProp {
   actionProps: IActionProps;
   selectedLanguage: Language;
+  input?: string;
+  inputMaxLength?: number;
+  isNumericMode: boolean;
   setInput: (value: string) => void;
   onDelete: () => void;
 }
@@ -71,8 +75,9 @@ export interface IKeyboardStyles {
     height: number;
     rowGap: number;
     columnGap: number;
-    pressedTitleColor: string;
+    disabledColor: string;
     pressedBgColor: string;
+    pressedTitleColor: string;
     fontSize: number;
     fontFamily: string;
     fontWeight: number;

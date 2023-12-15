@@ -6,8 +6,8 @@ import { englishLayout, georgianLayout } from '../utils';
 
 const initialKeyboardState: IKeyboardState = {
   input: '',
-  selectedLanguage: Language.EN,
-  currentLayout: englishLayout,
+  selectedLanguage: Language.KA,
+  currentLayout: georgianLayout,
   isShiftActive: false,
   isSymbolActive: false,
 }

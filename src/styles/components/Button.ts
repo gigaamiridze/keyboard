@@ -4,7 +4,7 @@ import { IButtonProps } from '../../models';
 import { Colors } from '../../constants';
 
 export const Button = styled.button<IButtonProps>`
-  ${({ styles, type, isNumericDotMode, isActive }) => css`
+  ${({ styles, type, isNumericMode, isNumericDotMode, isActive, disabled }) => css`
     width: ${styles.keyButton.regular.width}px;
     height: ${styles.keyButton.height}px;
     background-color: ${styles.keyButton.regular.backgroundColor};
@@ -50,9 +50,9 @@ export const Button = styled.button<IButtonProps>`
     `}
 
     ${type === ActionButtonType.DELETE && css`
-      width: ${isNumericDotMode ? styles.keyButton.regular?.width : styles.keyButton.delete?.width}px;
+      width: ${isNumericDotMode ? `${styles.keyButton.regular?.width}px` : isNumericMode ? `calc(100% - ${styles.keyButton.columnGap + styles.keyButton.regular.width}px)` : `${styles.keyButton.delete?.width}px`};
       background-color: ${styles.keyButton.delete?.backgroundColor};
-      color: ${styles.keyButton.delete?.color};
+      color: ${disabled ? styles.keyButton.disabledColor : styles.keyButton.delete?.color};
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -62,10 +62,16 @@ export const Button = styled.button<IButtonProps>`
       transform: scale(0.98);
     `}
 
+    &:disabled {
+      color: ${Colors.GRAY};
+      border: 2px solid ${Colors.GRAY};
+      background-color: transparent;
+    }
+
     &:active {
-      color: ${styles.keyButton.pressedTitleColor};
-      background-color: ${styles.keyButton.pressedBgColor};
-      transform: scale(0.98);
+      color: ${disabled ? null : styles.keyButton.pressedTitleColor};
+      background-color: ${disabled ? null : styles.keyButton.pressedBgColor};
+      transform: ${disabled ? null : 'scale(0.98)'};
 
       svg {
         fill: ${styles.keyButton.pressedTitleColor};
