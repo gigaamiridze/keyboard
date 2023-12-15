@@ -1,28 +1,23 @@
 import { FlexBox, RegularButton } from '../components';
-import { IKeyboardStyles } from '../interfaces';
+import { INumpadKeyboardProps } from '../models';
 import { numpadLayout } from '../utils';
-
-interface INumpadKeyboardProps {
-  styles?: IKeyboardStyles;
-  setInput: (value: string) => void;
-}
 
 function NumpadKeyboard({ styles, setInput }: INumpadKeyboardProps) {
   return (
-    <FlexBox flexDirection='column' alignItems='center' rowGap={5}>
+    <FlexBox flexDirection='column' alignItems='center' rowGap={styles.keyButton.rowGap}>
       {numpadLayout.map((row, rowIndex) => (
         <FlexBox 
           key={rowIndex}
           alignItems='center'
           justifyContent='space-between'
-          columnGap={5}
+          columnGap={styles.keyButton.columnGap}
         >
           {row.map((key, keyIndex) => (
             <RegularButton
               key={keyIndex}
               keyOptions={key}
               styles={styles}
-              onClick={(value) => setInput(value)}
+              onPress={(value) => setInput(value)}
             />
           ))}
         </FlexBox>

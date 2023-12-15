@@ -1,28 +1,16 @@
-import { IKeyboardStyles } from '../interfaces';
-import { ActionButtonType } from '../constants';
-import { Button } from '../components';
-
-interface IActionButtonProps {
-  label: string;
-  type: ActionButtonType;
-  isNumericMode?: boolean;
-  styles?: IKeyboardStyles;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
-  isActive?: boolean;
-  onClick: () => void;
-}
+import { IActionButtonProps } from '../models';
+import { Button } from '../styles';
 
 function ActionButton(props: IActionButtonProps) {
-  const { label, type, isNumericMode, styles, leftIcon, rightIcon, isActive, onClick } = props;
+  const { label, type, isNumericDotMode, styles, leftIcon, rightIcon, isActive, onPress } = props;
  
   return (
     <Button
       type={type}
-      isNumericMode={isNumericMode}
+      isNumericDotMode={isNumericDotMode}
       styles={styles}
       isActive={isActive}
-      onClick={onClick}
+      onClick={onPress}
     >
       {leftIcon && leftIcon}
       {label}

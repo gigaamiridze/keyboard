@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { GlobalStyles } from './styles';
 import isPropValid from '@emotion/is-prop-valid';
 import { StyleSheetManager } from 'styled-components';
+import { GlobalStyles, keyboardStyles } from './styles';
 import { KeyboardWithInput, Keyboard } from './templates';
 
 function App() {
@@ -10,15 +10,10 @@ function App() {
   return (
     <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
       <GlobalStyles />
-      {/* <Keyboard 
-        mode='qwerty'
-        styleType='tbc'
-        onKeyPress={(output) => setOutput(output)}
-      /> */}
       <KeyboardWithInput 
-        mode='qwerty'
-        styleType='tbc'
-        onKeyPress={(output) => setOutput(output)}
+        mode='numeric'
+        styles={keyboardStyles}
+        onKeyPress={(value) => setOutput(value)}
       />
     </StyleSheetManager>
   )

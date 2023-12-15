@@ -5,4 +5,5 @@ export interface IActionProps {
   hasSpace: boolean;
   hasClean: boolean;
   hasDelete: boolean;
+  hasDot: boolean;
 }

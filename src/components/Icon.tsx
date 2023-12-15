@@ -1,8 +1,4 @@
-export interface IconProps {
-  type: 'up-arrow' | 'globe' | 'backspace' | 'left-arrow' | 'dollar-sign' | 'euro-sign' | 'lari-sign';
-  size: number;
-  color: string;
-}
+import { IconProps } from '../models';
 
 function Icon(props: IconProps) {
   const { type, size, color } = props;

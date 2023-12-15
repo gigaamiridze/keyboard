@@ -1,3 +1,4 @@
-export * from './language';
-export * from './button';
-export * from './colors';
+export * from './Keyboard';
+export * from './Language';
+export * from './Button';
+export * from './Colors';

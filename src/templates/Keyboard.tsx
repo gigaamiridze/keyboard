@@ -1,16 +1,14 @@
-import { IKeyboardTemplateProps } from '../interfaces';
-import { tbcStyles, wissolStyles } from '../styles';
 import { KeyboardWrapper } from '../components';
+import { IKeyboardProps } from '../models';
 
-function Keyboard(props: IKeyboardTemplateProps) {
-  const { mode, styleType, onKeyPress } = props;
-  const styleToUse = styleType === 'tbc' ? tbcStyles : wissolStyles;
+function Keyboard(props: IKeyboardProps) {
+  const { mode, styles, onKeyPress } = props;
 
   return (
     <KeyboardWrapper 
       mode={mode}
-      styles={styleToUse}
-      onKeyPress={(output) => onKeyPress(output)} 
+      styles={styles}
+      onKeyPress={(value) => onKeyPress(value)} 
     />
   )
 }

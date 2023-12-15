@@ -1,17 +1,11 @@
 import { Fragment } from 'react';
-import { IKeyboardStyles, IActionProps, IQwertyKeyboardHookProps } from '../interfaces';
+import { IQwertyKeyboardProps } from '../models';
 import { getLabel, languageLabel, cleanLabel, deleteLabel } from '../utils';
 import { ActionButton, RegularButton, FlexBox } from '../components';
-import { ActionButtonType } from '../constants';
-
-interface IQwertyKeyboardProps {
-  styles?: IKeyboardStyles;
-  actionProps: IActionProps;
-  hookOptions: IQwertyKeyboardHookProps;
-}
+import { ActionButtonType } from '../types';
 
 function QwertyKeyboard(props: IQwertyKeyboardProps) {
-  const { styles, actionProps, hookOptions } = props;
+  const { styles, actionProps, hookProps } = props;
   const { hasShift, hasSymbol, hasLanguage, hasSpace, hasClean, hasDelete } = actionProps;
   const { 
     currentLayout,
@@ -25,16 +19,16 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
     onSpace, 
     onClean, 
     onDelete 
-  } = hookOptions;
+  } = hookProps;
   
   return (
-    <FlexBox flexDirection='column' alignItems='center' rowGap={5}>
+    <FlexBox flexDirection='column' alignItems='center' rowGap={styles.keyButton.rowGap}>
       {currentLayout.map((row, rowIndex) => (
         <FlexBox 
           key={rowIndex}
           alignItems='center'
           justifyContent='space-between'
-          columnGap={5}
+          columnGap={styles.keyButton.columnGap}
         >
           {row.map((key, keyIndex) => (
             <Fragment key={keyIndex}>
@@ -47,7 +41,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                   leftIcon={styles?.keyButton.shift?.leftIcon}
                   rightIcon={styles?.keyButton.shift?.rightIcon}
                   isActive={isShiftActive}
-                  onClick={onShift} 
+                  onPress={onShift} 
                 />
               )}
               <RegularButton
@@ -56,7 +50,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                 styles={styles}
                 isShiftActive={isShiftActive}
                 isSymbolActive={isSymbolActive}
-                onClick={(value) => setInput(value)}
+                onPress={(value) => setInput(value)}
               />
               {rowIndex === 2 && hasShift && keyIndex === row.length - 1 && (
                 <ActionButton 
@@ -67,7 +61,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                   leftIcon={styles?.keyButton.shift?.leftIcon}
                   rightIcon={styles?.keyButton.shift?.rightIcon}
                   isActive={isShiftActive}
-                  onClick={onShift} 
+                  onPress={onShift} 
                 />
               )}
             </Fragment>
@@ -77,7 +71,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
       <FlexBox
         alignItems='center'
         justifyContent='space-between'
-        columnGap={5}
+        columnGap={styles.keyButton.columnGap}
       >
         {hasSymbol && (
           <ActionButton 
@@ -87,7 +81,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             leftIcon={styles?.keyButton.symbol?.leftIcon}
             rightIcon={styles?.keyButton.symbol?.rightIcon}
             isActive={isSymbolActive} 
-            onClick={onSymbol} 
+            onPress={onSymbol} 
           />
         )}
         {hasLanguage && (
@@ -97,7 +91,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.language?.leftIcon}
             rightIcon={styles?.keyButton.language?.rightIcon}
-            onClick={onLanguageChange} 
+            onPress={onLanguageChange} 
           />
         )}
         {hasSpace && (
@@ -107,7 +101,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.space?.leftIcon}
             rightIcon={styles?.keyButton.space?.rightIcon}
-            onClick={onSpace} 
+            onPress={onSpace} 
           />
         )}
         {hasClean && (
@@ -117,7 +111,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.clean?.leftIcon}
             rightIcon={styles?.keyButton.clean?.rightIcon}
-            onClick={onClean} 
+            onPress={onClean} 
           />
         )}
         {hasDelete && (
@@ -127,7 +121,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.delete?.leftIcon}
             rightIcon={styles?.keyButton.delete?.rightIcon}
-            onClick={onDelete} 
+            onPress={onDelete} 
           />
         )}
       </FlexBox>

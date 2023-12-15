@@ -1,0 +1,9 @@
+export enum KeyboardAction {
+  SET_INPUT = 'SET_INPUT',
+  SHIFT = 'SHIFT',
+  SYMBOL = 'SYMBOL',
+  LANGUAGE_CHANGE = 'LANGUAGE_CHANGE',
+  SPACE = 'SPACE',
+  CLEAN = 'CLEAN',
+  DELETE = 'DELETE',
+}

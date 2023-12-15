@@ -1,16 +1,8 @@
-import { IButton, IKeyboardStyles } from '../interfaces';
-import { Button } from '../components';
-
-interface IRegularButtonProps {
-	keyOptions: IButton;
-  styles?: IKeyboardStyles;
-  isShiftActive?: boolean;
-  isSymbolActive?: boolean;
-	onClick: (value: string) => void;
-}
+import { IRegularButtonProps } from '../models';
+import { Button } from '../styles';
 
 function RegularButton(props: IRegularButtonProps) {
-  const { keyOptions, styles, isShiftActive, isSymbolActive, onClick } = props;
+  const { keyOptions, styles, isShiftActive, isSymbolActive, onPress } = props;
 
   const valueToPass = isShiftActive ? keyOptions.shiftValue : isSymbolActive ? keyOptions.symbolValue : keyOptions.value;
   const labelToRender = isShiftActive ? keyOptions.shiftValue : isSymbolActive ? keyOptions.symbolValue : keyOptions.label;
@@ -18,7 +10,7 @@ function RegularButton(props: IRegularButtonProps) {
   return (
     <Button
       styles={styles} 
-      onClick={() => onClick(valueToPass)}
+      onClick={() => onPress(valueToPass)}
     >
       {labelToRender}
     </Button>

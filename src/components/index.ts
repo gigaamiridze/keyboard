@@ -6,5 +6,5 @@ export { default as NumpadKeyboard } from './NumpadKeyboard';
 export { default as KeyboardInput } from './KeyboardInput';
 export { default as RegularButton } from './RegularButton';
 export { default as ActionButton } from './ActionButton';
+export { default as FlexBox } from './FlexBox';
 export { default as Icon } from './Icon';
-export * from './StyledComponents';

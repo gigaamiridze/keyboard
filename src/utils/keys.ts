@@ -1,4 +1,4 @@
-import { IButton } from '../interfaces';
+import { IButton } from '../models';
 
 function createButton(label: string, value: string, shiftValue: string = '', symbolValue: string = ''): IButton {
   return {

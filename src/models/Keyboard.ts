@@ -1,0 +1,105 @@
+import { IButton, IActionProps } from '../models';
+import { Language } from '../constants';
+
+export interface IKeyboardState {
+  input: string;
+  selectedLanguage: Language;
+  currentLayout: IButton[][];
+  isShiftActive: boolean;
+  isSymbolActive: boolean;
+}
+
+export interface IKeyboardProps extends IKeyboardStylesProp {
+  mode: 'numeric' | 'numeric-dot' | 'qwerty' | 'qwerty-numpad';
+  onKeyPress: (value: string) => void;
+}
+
+export interface IKeyboardLayoutProps extends IKeyboardProps {
+  actionProps: IActionProps;
+}
+
+export interface IKeyboardInputProps extends IKeyboardStylesProp {
+  output: string;
+}
+
+export interface INumericKeyboardProps extends IKeyboardStylesProp {
+  actionProps: IActionProps;
+  selectedLanguage: Language;
+  setInput: (value: string) => void;
+  onDelete: () => void;
+}
+
+export interface IQwertyKeyboardProps extends IKeyboardStylesProp {
+  actionProps: IActionProps;
+  hookProps: IQwertyKeyboardHookProps;
+}
+
+export interface INumpadKeyboardProps extends IKeyboardStylesProp {
+  setInput: (value: string) => void;
+}
+
+export interface IQwertyKeyboardHookProps {
+  currentLayout: IButton[][];
+  selectedLanguage: Language;
+  isShiftActive: boolean;
+  isSymbolActive: boolean;
+  setInput: (value: string) => void;
+  onShift: () => void;
+  onSymbol: () => void;
+  onLanguageChange: () => void;
+  onSpace: () => void;
+  onClean: () => void;
+  onDelete: () => void;
+}
+
+export interface IKeyboardStylesProp {
+  styles: IKeyboardStyles;
+}
+
+export interface IKeyboardStyles {
+  keyboardInput: {
+    width: number;
+    fontSize: number;
+    color: string;
+    borderColor: string;
+    borderWidth: number;
+    borderRadius: number;
+    leftIcon?: JSX.Element;
+    rightIcon?: JSX.Element;
+  },
+  keyButton: {
+    height: number;
+    rowGap: number;
+    columnGap: number;
+    pressedTitleColor: string;
+    pressedBgColor: string;
+    fontSize: number;
+    fontFamily: string;
+    fontWeight: number;
+    regular: IRegularButtonStyles;
+    action: { borderRadius: BorderRadiusType };
+    shift?: IActionButtonStyles;
+    symbol?: IActionButtonStyles;
+    language?: IActionButtonStyles;
+    space?: IActionButtonStyles;
+    clean?: IActionButtonStyles;
+    delete?: IActionButtonStyles;
+  }
+}
+
+interface IRegularButtonStyles {
+  width: number;
+  color: string;
+  backgroundColor: string;
+  borderRadius: BorderRadiusType;
+}
+
+interface IActionButtonStyles {
+  width: number;
+  color: string;
+  backgroundColor: string;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+}
+
+type BorderRadiusType = number | 'circle';

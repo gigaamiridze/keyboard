@@ -1,34 +1,8 @@
 import { useCallback, useReducer } from 'react';
-import { IButton } from '../interfaces';
-import { Language } from '../constants';
+import { IKeyboardState } from '../models';
+import { KeyboardActionType } from '../types';
+import { Language, KeyboardAction } from '../constants';
 import { englishLayout, georgianLayout } from '../utils';
-
-interface IKeyboardState {
-  input: string;
-  selectedLanguage: Language;
-  currentLayout: IButton[][];
-  isShiftActive: boolean;
-  isSymbolActive: boolean;
-}
-
-type KeyboardActionType =
-  | { type: KeyboardAction.SET_INPUT; payload: string }
-  | { type: KeyboardAction.SHIFT }
-  | { type: KeyboardAction.SYMBOL }
-  | { type: KeyboardAction.LANGUAGE_CHANGE }
-  | { type: KeyboardAction.SPACE; payload: string }
-  | { type: KeyboardAction.CLEAN }
-  | { type: KeyboardAction.DELETE }
-
-enum KeyboardAction {
-  SET_INPUT = 'SET_INPUT',
-  SHIFT = 'SHIFT',
-  SYMBOL = 'SYMBOL',
-  LANGUAGE_CHANGE = 'LANGUAGE_CHANGE',
-  SPACE = 'SPACE',
-  CLEAN = 'CLEAN',
-  DELETE = 'DELETE',
-}
 
 const initialKeyboardState: IKeyboardState = {
   input: '',

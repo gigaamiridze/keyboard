@@ -1,10 +1,5 @@
-import { InputContainer, StyledKeyboardInput } from '../components';
-import { IKeyboardStyles } from '../interfaces';
-
-interface IKeyboardInputProps {
-  output: string;
-  styles?: IKeyboardStyles;
-}
+import { InputContainer, StyledKeyboardInput } from '../styles';
+import { IKeyboardInputProps } from '../models';
 
 function KeyboardInput(props: IKeyboardInputProps) {
   const { output, styles } = props;

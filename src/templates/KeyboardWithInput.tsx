@@ -1,25 +1,23 @@
 import { useState } from 'react';
-import { tbcStyles, wissolStyles } from '../styles';
-import { IKeyboardTemplateProps } from '../interfaces';
+import { IKeyboardProps } from '../models';
 import { KeyboardInput, KeyboardWrapper } from '../components';
 
-function KeyboardWithInput(props: IKeyboardTemplateProps) {
+function KeyboardWithInput(props: IKeyboardProps) {
   const [output, setOutput] = useState<string>('');
-  const { mode, styleType, onKeyPress } = props;
-  const styleToUse = styleType === 'tbc' ? tbcStyles : wissolStyles;
+  const { mode, styles, onKeyPress } = props;
 
   return (
     <>
       <KeyboardInput 
         output={output} 
-        styles={styleToUse} 
+        styles={styles} 
       />
       <KeyboardWrapper 
         mode={mode}
-        styles={styleToUse}
-        onKeyPress={(output) => {
-          setOutput(output);
-          onKeyPress(output);
+        styles={styles}
+        onKeyPress={(value) => {
+          setOutput(value);
+          onKeyPress(value);
         }} 
       />
     </>
