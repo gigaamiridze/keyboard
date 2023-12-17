@@ -6,7 +6,7 @@ import { ActionButtonType } from '../types';
 function NumericKeyboard(props: INumericKeyboardProps) {
   const { styles, actionProps, selectedLanguage, input, inputMaxLength, isNumericMode, setInput, onDelete } = props;
 
-  const disabled = input?.length === inputMaxLength;
+  const isInputFilled = input?.length === inputMaxLength;
 
   return (
     <FlexBox flexDirection='column' alignItems='center' rowGap={styles.keyButton.rowGap}>
@@ -25,7 +25,7 @@ function NumericKeyboard(props: INumericKeyboardProps) {
               <RegularButton
                 key={keyIndex}
                 keyOptions={key}
-                disabled={disabled}
+                disabled={isInputFilled}
                 styles={styles}
                 onPress={(value) => setInput(value)}
               />
@@ -37,6 +37,7 @@ function NumericKeyboard(props: INumericKeyboardProps) {
               type={ActionButtonType.DELETE}
               isNumericMode={isNumericMode}
               isNumericDotMode={actionProps.hasDot}
+              isInputFilled={isInputFilled}
               styles={styles} 
               leftIcon={styles?.keyButton.delete?.leftIcon}
               rightIcon={styles?.keyButton.delete?.rightIcon}

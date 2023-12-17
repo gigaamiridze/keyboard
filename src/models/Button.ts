@@ -13,16 +13,18 @@ export interface IButtonProps extends IKeyboardStylesProp {
   isNumericMode?: boolean;
   isNumericDotMode?: boolean;
   isActive?: boolean;
+  isInputFilled?: boolean;
 }
 
 export interface IActionButtonProps extends IKeyboardStylesProp {
   label: string;
   type: ActionButtonType;
   isNumericDotMode?: boolean;
+  isNumericMode?: boolean;
+  isInputFilled?: boolean;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   isActive?: boolean;
-  isNumericMode?: boolean;
   onPress: () => void;
 }
 

@@ -19,6 +19,8 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onDelete 
   } = useKeyboardLayout();
   const { mode, styles, actionProps, inputMaxLength, onKeyPress } = props;
+
+  console.log(input);
   
   useEffect(() => {
     onKeyPress(input);

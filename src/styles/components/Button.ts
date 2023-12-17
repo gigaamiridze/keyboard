@@ -4,7 +4,7 @@ import { IButtonProps } from '../../models';
 import { Colors } from '../../constants';
 
 export const Button = styled.button<IButtonProps>`
-  ${({ styles, type, isNumericMode, isNumericDotMode, isActive, disabled }) => css`
+  ${({ styles, type, isNumericMode, isNumericDotMode, isActive, isInputFilled, disabled }) => css`
     width: ${styles.keyButton.regular.width}px;
     height: ${styles.keyButton.height}px;
     background-color: ${styles.keyButton.regular.backgroundColor};
@@ -51,8 +51,8 @@ export const Button = styled.button<IButtonProps>`
 
     ${type === ActionButtonType.DELETE && css`
       width: ${isNumericDotMode ? `${styles.keyButton.regular?.width}px` : isNumericMode ? `calc(100% - ${styles.keyButton.columnGap + styles.keyButton.regular.width}px)` : `${styles.keyButton.delete?.width}px`};
-      background-color: ${styles.keyButton.delete?.backgroundColor};
-      color: ${disabled ? styles.keyButton.disabledColor : styles.keyButton.delete?.color};
+      background-color: ${isInputFilled ? Colors.GRAY : styles.keyButton.delete?.backgroundColor};
+      color: ${isInputFilled ? Colors.LIGHT_BLUE : styles.keyButton.delete?.color};
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -89,6 +89,7 @@ export const Button = styled.button<IButtonProps>`
 
   svg {
     transition: all 0.2s ease;
+    fill: ${({ isInputFilled }) => isInputFilled && Colors.LIGHT_BLUE};
   }
 `;
 
