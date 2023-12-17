@@ -1,4 +1,5 @@
 import { IButton, IActionProps } from '../models';
+import { KeyboardInputType } from '../types';
 import { Language } from '../constants';
 
 export interface IKeyboardState {
@@ -7,6 +8,10 @@ export interface IKeyboardState {
   currentLayout: IButton[][];
   isShiftActive: boolean;
   isSymbolActive: boolean;
+}
+
+export interface IKeyboardWithInputProps extends IKeyboardProps {
+  inputType: KeyboardInputType;
 }
 
 export interface IKeyboardProps extends IKeyboardStylesProp {
@@ -20,6 +25,8 @@ export interface IKeyboardLayoutProps extends IKeyboardProps {
 }
 
 export interface IKeyboardInputProps extends IKeyboardStylesProp {
+  type: KeyboardInputType;
+  inputMaxLength: number;
   output: string;
 }
 

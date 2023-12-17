@@ -5,12 +5,12 @@ import { Icon } from '../components';
 export const keyboardStyles: IKeyboardStyles = {
   input: {
     height: 45,
-    fontSize: 18,
-    color: Colors.LIGHT_BLUE,
+    fontSize: 25,
+    color: Colors.BLACK,
     borderColor: Colors.LIGHT_BLUE,
     borderWidth: 2,
     borderRadius: 10,
-    gapBetweenInputAndKeyboard: 30,
+    gapBetweenInputAndKeyboard: 40,
   },
   keyButton: {
     height: 65,

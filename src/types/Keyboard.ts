@@ -8,3 +8,5 @@ export type KeyboardActionType =
   | { type: KeyboardAction.SPACE; payload: string }
   | { type: KeyboardAction.CLEAN }
   | { type: KeyboardAction.DELETE }
+
+export type KeyboardInputType = 'field' | 'mobile-underscore' |'underscore';

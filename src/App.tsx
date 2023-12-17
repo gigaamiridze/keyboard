@@ -13,7 +13,7 @@ function App() {
       <KeyboardWithInput 
         mode='numeric'
         styles={keyboardStyles}
-        inputMaxLength={3}
+        inputType='mobile-underscore'
         onKeyPress={(value) => setOutput(value)}
       />
     </StyleSheetManager>
