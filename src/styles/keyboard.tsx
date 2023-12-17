@@ -3,13 +3,14 @@ import { Colors } from '../constants';
 import { Icon } from '../components';
 
 export const keyboardStyles: IKeyboardStyles = {
-  keyboardInput: {
-    width: 400,
+  input: {
+    height: 45,
     fontSize: 18,
     color: Colors.LIGHT_BLUE,
     borderColor: Colors.LIGHT_BLUE,
     borderWidth: 2,
     borderRadius: 10,
+    gapBetweenInputAndKeyboard: 30,
   },
   keyButton: {
     height: 65,

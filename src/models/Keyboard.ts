@@ -61,15 +61,17 @@ export interface IKeyboardStylesProp {
 }
 
 export interface IKeyboardStyles {
-  keyboardInput: {
-    width: number;
+  input: {
+    width?: number;
+    height?: number;
     fontSize: number;
     color: string;
-    borderColor: string;
-    borderWidth: number;
-    borderRadius: number;
+    borderColor?: string;
+    borderWidth?: number;
+    borderRadius?: number;
     leftIcon?: JSX.Element;
     rightIcon?: JSX.Element;
+    gapBetweenInputAndKeyboard: number;
   },
   keyButton: {
     height: number;

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { IKeyboardProps } from '../models';
-import { KeyboardInput, KeyboardWrapper } from '../components';
+import { KeyboardInput, KeyboardWrapper, FlexBox } from '../components';
 
 function KeyboardWithInput(props: IKeyboardProps) {
   const [output, setOutput] = useState<string>('');
@@ -12,7 +12,12 @@ function KeyboardWithInput(props: IKeyboardProps) {
   }, [onKeyPress]);
 
   return (
-    <>
+    <FlexBox
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+      rowGap={styles.input.gapBetweenInputAndKeyboard}
+    >
       <KeyboardInput 
         output={output} 
         styles={styles} 
@@ -23,7 +28,7 @@ function KeyboardWithInput(props: IKeyboardProps) {
         inputMaxLength={inputMaxLength}
         onKeyPress={wrappedOnKeyPress} 
       />
-    </>
+    </FlexBox>
   )
 }
 

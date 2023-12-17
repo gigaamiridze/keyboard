@@ -6,13 +6,13 @@ function KeyboardInput(props: IKeyboardInputProps) {
 
   return (
     <InputContainer styles={styles}>
-      {styles?.keyboardInput.leftIcon && styles.keyboardInput.leftIcon}
+      {styles.input.leftIcon && styles.input.leftIcon}
       <StyledKeyboardInput 
         value={output} 
         styles={styles} 
         readOnly 
       />
-      {styles?.keyboardInput.rightIcon && styles.keyboardInput.rightIcon}
+      {styles.input.rightIcon && styles.input.rightIcon}
     </InputContainer>
   )
 }
