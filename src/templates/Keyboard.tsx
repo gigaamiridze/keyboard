@@ -8,7 +8,7 @@ function Keyboard(props: IKeyboardProps) {
     <KeyboardWrapper 
       mode={mode}
       styles={styles}
-      onKeyPress={(value) => onKeyPress(value)} 
+      onKeyPress={(value) => onKeyPress && onKeyPress(value)} 
     />
   )
 }

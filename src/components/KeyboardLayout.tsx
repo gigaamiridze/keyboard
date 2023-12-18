@@ -23,7 +23,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
   console.log(input);
   
   useEffect(() => {
-    onKeyPress(input);
+    onKeyPress && onKeyPress(input);
   }, [input]);
 
   const qwertyKeyboardHookProps: IQwertyKeyboardHookProps = {
