@@ -21,7 +21,7 @@ function KeyboardInput(props: IKeyboardInputProps) {
 
   return (
     <>
-      {type === 'field' && (
+      {type === 'outlined' && (
         <InputContainer styles={styles}>
           {styles.input.leftIcon && styles.input.leftIcon}
           <StyledKeyboardInput 

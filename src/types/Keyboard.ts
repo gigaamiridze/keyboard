@@ -9,4 +9,4 @@ export type KeyboardActionType =
   | { type: KeyboardAction.CLEAN }
   | { type: KeyboardAction.DELETE }
 
-export type KeyboardInputType = 'field' | 'mobile-underscore' |'underscore';
+export type KeyboardInputType = 'outlined' | 'mobile-underscore' |'underscore';
