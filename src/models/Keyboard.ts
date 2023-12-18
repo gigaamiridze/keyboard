@@ -16,7 +16,7 @@ export interface IKeyboardWithInputProps extends IKeyboardProps {
 
 export interface IKeyboardProps extends IKeyboardStylesProp {
   mode: 'numeric' | 'numeric-dot' | 'qwerty' | 'qwerty-numpad';
-  onKeyPress: (value: string) => void;
+  onKeyPress?: (value: string) => void;
   inputMaxLength?: number; 
 }
 
@@ -112,6 +112,7 @@ interface IActionButtonStyles {
   width: number;
   color: string;
   backgroundColor: string;
+  fontSize?: number;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
 }

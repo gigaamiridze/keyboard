@@ -9,7 +9,7 @@ function KeyboardWithInput(props: IKeyboardWithInputProps) {
 
   const wrappedOnKeyPress = useCallback((value: string) => {
     setOutput(value);
-    onKeyPress(value)
+    onKeyPress && onKeyPress(value)
   }, [onKeyPress]);
 
   return (

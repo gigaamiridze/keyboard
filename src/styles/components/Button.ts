@@ -18,6 +18,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${styles.keyButton.shift?.width}px;
       background-color: ${styles.keyButton.shift?.backgroundColor};
       color: ${styles.keyButton.shift?.color};
+      font-size: ${styles.keyButton.shift?.fontSize ? styles.keyButton.shift.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -25,6 +26,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${styles.keyButton.symbol?.width}px;
       background-color: ${styles.keyButton.symbol?.backgroundColor};
       color: ${styles.keyButton.symbol?.color};
+      font-size: ${styles.keyButton.symbol?.fontSize ? styles.keyButton.symbol.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -32,6 +34,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${styles.keyButton.language?.width}px;
       background-color: ${styles.keyButton.language?.backgroundColor};
       color: ${styles.keyButton.language?.color};
+      font-size: ${styles.keyButton.language?.fontSize ? styles.keyButton.language.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -39,6 +42,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${styles.keyButton.space?.width}px;
       background-color: ${styles.keyButton.space?.backgroundColor};
       color: ${styles.keyButton.space?.color};
+      font-size: ${styles.keyButton.space?.fontSize ? styles.keyButton.space.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -46,6 +50,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${styles.keyButton.clean?.width}px;
       background-color: ${styles.keyButton.clean?.backgroundColor};
       color: ${styles.keyButton.clean?.color};
+      font-size: ${styles.keyButton.clean?.fontSize ? styles.keyButton.clean.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 
@@ -53,6 +58,7 @@ export const Button = styled.button<IButtonProps>`
       width: ${isNumericDotMode ? `${styles.keyButton.regular?.width}px` : isNumericMode ? `calc(100% - ${styles.keyButton.columnGap + styles.keyButton.regular.width}px)` : `${styles.keyButton.delete?.width}px`};
       background-color: ${isInputFilled ? Colors.GRAY : styles.keyButton.delete?.backgroundColor};
       color: ${isInputFilled ? Colors.LIGHT_BLUE : styles.keyButton.delete?.color};
+      font-size: ${styles.keyButton.delete?.fontSize ? styles.keyButton.delete.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
 

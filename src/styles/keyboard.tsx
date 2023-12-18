@@ -62,6 +62,7 @@ export const keyboardStyles: IKeyboardStyles = {
       width: 100,
       backgroundColor: Colors.LIGHT_BLUE,
       color: Colors.WHITE,
+      fontSize: 20,
       leftIcon: <Icon type='backspace' size={25} color={Colors.WHITE} />,
     },
   }
