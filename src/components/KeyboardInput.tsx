@@ -48,13 +48,14 @@ function KeyboardInput(props: IKeyboardInputProps) {
           alignItems='center'
           additionalStyles={{ height: styles.input.passwordIconSize || 40 }}
         >
-          {Array(output.length).fill(
+          {Array.from({ length: output.length }, (_, index) => (
             <Icon 
+              key={index}
               type='ellipse' 
               size={styles.input.passwordIconSize || 40} 
               color={styles.input.passwordIconColor || Colors.BLACK} 
             />
-          )}
+          ))}
         </FlexBox>
       )}
     </>
