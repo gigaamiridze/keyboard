@@ -1,4 +1,5 @@
 import { IActionButtonProps } from '../models';
+import { ActionButtonType } from '../types';
 import { Button } from '../styles';
 
 function ActionButton(props: IActionButtonProps) {
@@ -12,6 +13,7 @@ function ActionButton(props: IActionButtonProps) {
       isInputFilled={isInputFilled}
       styles={styles}
       isActive={isActive}
+      disabled={type === ActionButtonType.SPACE && isInputFilled}
       onClick={onPress}
     >
       {leftIcon && leftIcon}

@@ -1,6 +1,6 @@
 import isPropValid from '@emotion/is-prop-valid';
 import { StyleSheetManager } from 'styled-components';
-import { GlobalStyles, keyboardStyles } from './styles';
+import { GlobalStyles, numericKeyboardStyles, qwertyKeyboardStyles } from './styles';
 import { KeyboardWithInput } from './templates';
 
 function App() {
@@ -8,9 +8,10 @@ function App() {
     <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
       <GlobalStyles />
       <KeyboardWithInput 
-        mode='numeric'
-        styles={keyboardStyles}
-        inputType='mobile-underscore'
+        mode='qwerty-numpad'
+        styles={qwertyKeyboardStyles}
+        inputType='underscore'
+        inputMaxLength={20}
       />
     </StyleSheetManager>
   )
