@@ -19,8 +19,6 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onDelete 
   } = useKeyboardLayout();
   const { mode, styles, actionProps, inputMaxLength, onKeyPress } = props;
-
-  console.log(input);
   
   useEffect(() => {
     onKeyPress && onKeyPress(input);
@@ -45,6 +43,8 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
       {mode === 'qwerty' || mode === 'qwerty-numpad' ? (
         <QwertyKeyboard 
           actionProps={actionProps}
+          input={input}
+          inputMaxLength={inputMaxLength}
           hookProps={qwertyKeyboardHookProps}
           styles={styles}
         />
@@ -52,6 +52,8 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
       {mode === 'qwerty-numpad' && (
         <NumpadKeyboard 
           styles={styles}
+          input={input}
+          inputMaxLength={inputMaxLength}
           setInput={setInput}
         />
       )}

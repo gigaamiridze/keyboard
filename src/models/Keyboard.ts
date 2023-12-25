@@ -14,6 +14,11 @@ export interface IKeyboardWithInputProps extends IKeyboardProps {
   inputType: KeyboardInputType;
 }
 
+interface InputPropsForKeyboard {
+  input?: string;
+  inputMaxLength?: number;
+}
+
 export interface IKeyboardProps extends IKeyboardStylesProp {
   mode: 'numeric' | 'numeric-dot' | 'qwerty' | 'qwerty-numpad';
   onKeyPress?: (value: string) => void;
@@ -30,7 +35,7 @@ export interface IKeyboardInputProps extends IKeyboardStylesProp {
   output: string;
 }
 
-export interface INumericKeyboardProps extends IKeyboardStylesProp {
+export interface INumericKeyboardProps extends IKeyboardStylesProp, InputPropsForKeyboard {
   actionProps: IActionProps;
   selectedLanguage: Language;
   input?: string;
@@ -40,12 +45,12 @@ export interface INumericKeyboardProps extends IKeyboardStylesProp {
   onDelete: () => void;
 }
 
-export interface IQwertyKeyboardProps extends IKeyboardStylesProp {
+export interface IQwertyKeyboardProps extends IKeyboardStylesProp, InputPropsForKeyboard {
   actionProps: IActionProps;
   hookProps: IQwertyKeyboardHookProps;
 }
 
-export interface INumpadKeyboardProps extends IKeyboardStylesProp {
+export interface INumpadKeyboardProps extends IKeyboardStylesProp, InputPropsForKeyboard {
   setInput: (value: string) => void;
 }
 

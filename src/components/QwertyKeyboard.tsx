@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
-import { IQwertyKeyboardProps } from '../models';
 import { getLabel, languageLabel, cleanLabel, deleteLabel } from '../utils';
 import { ActionButton, RegularButton, FlexBox } from '../components';
+import { IQwertyKeyboardProps } from '../models';
 import { ActionButtonType } from '../types';
 
 function QwertyKeyboard(props: IQwertyKeyboardProps) {
-  const { styles, actionProps, hookProps } = props;
+  const { styles, actionProps, input, inputMaxLength, hookProps } = props;
   const { hasShift, hasSymbol, hasLanguage, hasSpace, hasClean, hasDelete } = actionProps;
   const { 
     currentLayout,
@@ -20,6 +20,8 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
     onClean, 
     onDelete 
   } = hookProps;
+
+  const isInputFilled = input?.length === inputMaxLength;
   
   return (
     <FlexBox flexDirection='column' alignItems='center' rowGap={styles.keyButton.rowGap}>
@@ -40,6 +42,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                   styles={styles}
                   leftIcon={styles?.keyButton.shift?.leftIcon}
                   rightIcon={styles?.keyButton.shift?.rightIcon}
+                  isInputFilled={isInputFilled}
                   isActive={isShiftActive}
                   onPress={onShift} 
                 />
@@ -47,6 +50,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
               <RegularButton
                 key={keyIndex}
                 keyOptions={key}
+                disabled={isInputFilled}
                 styles={styles}
                 isShiftActive={isShiftActive}
                 isSymbolActive={isSymbolActive}
@@ -60,6 +64,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
                   styles={styles}
                   leftIcon={styles?.keyButton.shift?.leftIcon}
                   rightIcon={styles?.keyButton.shift?.rightIcon}
+                  isInputFilled={isInputFilled}
                   isActive={isShiftActive}
                   onPress={onShift} 
                 />
@@ -80,6 +85,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.symbol?.leftIcon}
             rightIcon={styles?.keyButton.symbol?.rightIcon}
+            isInputFilled={isInputFilled}
             isActive={isSymbolActive} 
             onPress={onSymbol} 
           />
@@ -91,6 +97,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.language?.leftIcon}
             rightIcon={styles?.keyButton.language?.rightIcon}
+            isInputFilled={isInputFilled}
             onPress={onLanguageChange} 
           />
         )}
@@ -101,6 +108,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.space?.leftIcon}
             rightIcon={styles?.keyButton.space?.rightIcon}
+            isInputFilled={isInputFilled}
             onPress={onSpace} 
           />
         )}
@@ -111,6 +119,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.clean?.leftIcon}
             rightIcon={styles?.keyButton.clean?.rightIcon}
+            isInputFilled={isInputFilled}
             onPress={onClean} 
           />
         )}
@@ -121,6 +130,7 @@ function QwertyKeyboard(props: IQwertyKeyboardProps) {
             styles={styles} 
             leftIcon={styles?.keyButton.delete?.leftIcon}
             rightIcon={styles?.keyButton.delete?.rightIcon}
+            isInputFilled={isInputFilled}
             onPress={onDelete} 
           />
         )}
