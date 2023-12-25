@@ -7,6 +7,4 @@ export type KeyboardActionType =
   | { type: KeyboardAction.LANGUAGE_CHANGE }
   | { type: KeyboardAction.SPACE; payload: string }
   | { type: KeyboardAction.CLEAN }
-  | { type: KeyboardAction.DELETE }
-
-export type KeyboardInputType = 'outlined' | 'mobile-underscore' |'underscore';
+  | { type: KeyboardAction.DELETE };

@@ -1,11 +1,12 @@
 import { useState, useCallback } from 'react';
+import { KeyboardInputType } from '../constants';
 import { IKeyboardWithInputProps } from '../models';
 import { KeyboardInput, KeyboardWrapper, FlexBox } from '../components';
 
 function KeyboardWithInput(props: IKeyboardWithInputProps) {
   const [output, setOutput] = useState<string>('');
   const { mode, styles, inputType, inputMaxLength, onKeyPress } = props;
-  const keyboardInputMaxLength = inputType === 'mobile-underscore' ? 9 : inputMaxLength ? inputMaxLength : 4;
+  const keyboardInputMaxLength = inputType === KeyboardInputType.MOBILE_UNDERSCORE ? 9 : inputMaxLength ? inputMaxLength : 4;
 
   const wrappedOnKeyPress = useCallback((value: string) => {
     setOutput(value);

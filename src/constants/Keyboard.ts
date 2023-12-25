@@ -7,3 +7,17 @@ export enum KeyboardAction {
   CLEAN = 'CLEAN',
   DELETE = 'DELETE',
 }
+
+export enum KeyboardMode {
+  NUMERIC = 'NUMERIC',
+  NUMERIC_DOT = 'NUMERIC_DOT',
+  QWERTY = 'QWERTY',
+  QWERTY_NUMPAD = 'QWERTY_NUMPAD',
+}
+
+export enum KeyboardInputType {
+  OUTLINED = 'OUTLINED',
+  MOBILE_UNDERSCORE = 'MOBILE_UNDERSCORE',
+  UNDERSCORE = 'UNDERSCORE',
+  PASSWORD = 'PASSWORD',
+}

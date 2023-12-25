@@ -1,6 +1,5 @@
+import { Language, KeyboardInputType, KeyboardMode } from '../constants';
 import { IButton, IActionProps } from '../models';
-import { KeyboardInputType } from '../types';
-import { Language } from '../constants';
 
 export interface IKeyboardState {
   input: string;
@@ -20,7 +19,7 @@ interface InputPropsForKeyboard {
 }
 
 export interface IKeyboardProps extends IKeyboardStylesProp {
-  mode: 'numeric' | 'numeric-dot' | 'qwerty' | 'qwerty-numpad';
+  mode: KeyboardMode;
   onKeyPress?: (value: string) => void;
   inputMaxLength?: number; 
 }
@@ -78,6 +77,8 @@ export interface IKeyboardStyles {
     height?: number;
     fontSize: number;
     color: string;
+    passwordIconSize?: number;
+    passwordIconColor?: string;
     borderColor?: string;
     borderWidth?: number;
     borderRadius?: number;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { KeyboardMode } from '../constants';
 import { useKeyboardLayout } from '../hooks';
 import { IKeyboardLayoutProps, IQwertyKeyboardHookProps } from '../models';
 import { QwertyKeyboard, NumpadKeyboard, NumericKeyboard, FlexBox } from '../components';
@@ -40,7 +41,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
   
   return (
     <FlexBox alignItems='flex-start' columnGap={20}>
-      {mode === 'qwerty' || mode === 'qwerty-numpad' ? (
+      {mode === KeyboardMode.QWERTY || mode === KeyboardMode.QWERTY_NUMPAD ? (
         <QwertyKeyboard 
           actionProps={actionProps}
           input={input}
@@ -49,7 +50,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
           styles={styles}
         />
       ) : null}
-      {mode === 'qwerty-numpad' && (
+      {mode === KeyboardMode.QWERTY_NUMPAD && (
         <NumpadKeyboard 
           styles={styles}
           input={input}
@@ -57,13 +58,13 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
           setInput={setInput}
         />
       )}
-      {mode === 'numeric' || mode === 'numeric-dot' ? (
+      {mode === KeyboardMode.NUMERIC || mode === KeyboardMode.NUMERIC_DOT ? (
         <NumericKeyboard 
           styles={styles}
           actionProps={actionProps}
           input={input}
           inputMaxLength={inputMaxLength}
-          isNumericMode={mode === 'numeric'}
+          isNumericMode={mode === KeyboardMode.NUMERIC}
           selectedLanguage={selectedLanguage}
           setInput={setInput}
           onDelete={onDelete}

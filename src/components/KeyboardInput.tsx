@@ -1,9 +1,11 @@
 import { InputContainer, StyledKeyboardInput, Underscore } from '../styles';
+import { KeyboardInputType, Colors } from '../constants';
 import { IKeyboardInputProps } from '../models';
+import { FlexBox, Icon } from '../components';
 
 function KeyboardInput(props: IKeyboardInputProps) {
   const { type, inputMaxLength, output, styles } = props;
-  const formatTemplate = type === 'mobile-underscore' ? '___-______' : '_'.repeat(inputMaxLength);
+  const formatTemplate = type === KeyboardInputType.MOBILE_UNDERSCORE ? '___-______' : '_'.repeat(inputMaxLength);
 
   const formatString = (input: string, formatTemplate: string) => {
     if (!input || !formatTemplate) {
@@ -21,7 +23,7 @@ function KeyboardInput(props: IKeyboardInputProps) {
 
   return (
     <>
-      {type === 'outlined' && (
+      {type === KeyboardInputType.OUTLINED && (
         <InputContainer styles={styles}>
           {styles.input.leftIcon && styles.input.leftIcon}
           <StyledKeyboardInput 
@@ -32,7 +34,7 @@ function KeyboardInput(props: IKeyboardInputProps) {
           {styles.input.rightIcon && styles.input.rightIcon}
         </InputContainer>
       )}
-      {type === 'mobile-underscore' || type === 'underscore' ? (
+      {type === KeyboardInputType.MOBILE_UNDERSCORE || type === KeyboardInputType.UNDERSCORE ? (
         <Underscore
           color={styles.input.color}
           fontSize={styles.input.fontSize}
@@ -41,6 +43,20 @@ function KeyboardInput(props: IKeyboardInputProps) {
           {formatString(output, formatTemplate)}
         </Underscore>
       ) : null}
+      {type === KeyboardInputType.PASSWORD && (
+        <FlexBox 
+          alignItems='center'
+          additionalStyles={{ height: styles.input.passwordIconSize || 40 }}
+        >
+          {Array(output.length).fill(
+            <Icon 
+              type='ellipse' 
+              size={styles.input.passwordIconSize || 40} 
+              color={styles.input.passwordIconColor || Colors.BLACK} 
+            />
+          )}
+        </FlexBox>
+      )}
     </>
   )
 }
