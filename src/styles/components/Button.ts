@@ -57,7 +57,7 @@ export const Button = styled.button<IButtonProps>`
     ${type === ActionButtonType.DELETE && css`
       width: ${isNumericDotMode ? `${styles.keyButton.regular?.width}px` : isNumericMode ? `calc(100% - ${styles.keyButton.columnGap + styles.keyButton.regular.width}px)` : `${styles.keyButton.delete?.width}px`};
       background-color: ${isInputFilled ? Colors.GRAY : styles.keyButton.delete?.backgroundColor};
-      color: ${isInputFilled ? Colors.LIGHT_BLUE : styles.keyButton.delete?.color};
+      color: ${isInputFilled ? styles.keyButton.pressedTitleColor : styles.keyButton.delete?.color};
       font-size: ${styles.keyButton.delete?.fontSize ? styles.keyButton.delete.fontSize : styles.keyButton.fontSize}px;
       border-radius: ${styles.keyButton.action.borderRadius === 'circle' ? '50%' : `${styles.keyButton.action.borderRadius}px`};
     `}
@@ -87,15 +87,15 @@ export const Button = styled.button<IButtonProps>`
   border: none;
   outline: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   column-gap: 6px;
 
   svg {
-    transition: all 0.2s ease;
-    fill: ${({ isInputFilled }) => isInputFilled && Colors.LIGHT_BLUE};
+    transition: all 0.1s ease;
+    fill: ${({ isInputFilled, styles }) => isInputFilled && styles.keyButton.pressedTitleColor};
   }
 `;
 
