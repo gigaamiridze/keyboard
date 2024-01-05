@@ -1,18 +1,19 @@
-import { useCallback, useReducer } from 'react';
-import { IKeyboardState } from '../models';
+import { useEffect, useCallback, useReducer } from 'react';
+import { IButton, IKeyboardState } from '../models';
 import { KeyboardActionType } from '../types';
+import { getLayoutByLanguage } from '../utils';
 import { Language, KeyboardAction } from '../constants';
-import { englishLayout, georgianLayout } from '../utils';
+import { englishLayout, georgianLayout, russianLayout } from '../utils';
 
-const initialKeyboardState: IKeyboardState = {
-  input: '',
-  selectedLanguage: Language.KA,
-  currentLayout: georgianLayout,
-  isShiftActive: false,
-  isSymbolActive: false,
-}
+const useKeyboardLayout = (initialLanguage: Language = Language.EN) => {
+  const initialKeyboardState: IKeyboardState = {
+    input: '',
+    selectedLanguage: initialLanguage,
+    currentLayout: getLayoutByLanguage(initialLanguage),
+    isShiftActive: false,
+    isSymbolActive: false,
+  }
 
-const useKeyboardLayout = () => {
   const keyboardReducer = useCallback((state: IKeyboardState, action: KeyboardActionType) => {
     switch (action.type) {
       case KeyboardAction.SET_INPUT:
@@ -22,21 +23,54 @@ const useKeyboardLayout = () => {
       case KeyboardAction.SYMBOL:
         return { ...state, isSymbolActive: !state.isSymbolActive };
       case KeyboardAction.LANGUAGE_CHANGE:
-        return { 
-          ...state, 
-          currentLayout: state.currentLayout === englishLayout ? georgianLayout : englishLayout,
-          selectedLanguage: state.selectedLanguage === Language.EN ? Language.KA : Language.EN 
-        };
+        const { nextLayout, nextLanguage } = handleLanguageChange(state.currentLayout, state.selectedLanguage);
+        return { ...state, currentLayout: nextLayout, selectedLanguage: nextLanguage };
+      case KeyboardAction.SET_LAYOUT:
+        const { currentLayout, selectedLanguage } = action.payload;
+        return { ...state, currentLayout, selectedLanguage };
       case KeyboardAction.SPACE:
         return { ...state, input: action.payload };
       case KeyboardAction.CLEAN:
         return { ...state, input: '' };
       case KeyboardAction.DELETE:
         return { ...state, input: state.input.slice(0, -1) };
+      default:
+        return state;
     }
   }, []);
 
   const [state, dispatch] = useReducer(keyboardReducer, initialKeyboardState);
+
+  useEffect(() => {
+    const layout = getLayoutByLanguage(initialLanguage);
+
+    dispatch({ 
+      type: KeyboardAction.SET_LAYOUT, 
+      payload: { currentLayout: layout, selectedLanguage: initialLanguage }, 
+    });
+  }, [initialLanguage]);
+
+  const handleLanguageChange = (currentLayout: IButton[][], selectedLanguage: Language) => {
+    let nextLayout;
+    let nextLanguage;
+  
+    switch (currentLayout) {
+      case englishLayout:
+        nextLayout = selectedLanguage === Language.KA ? georgianLayout : russianLayout;
+        nextLanguage = selectedLanguage === Language.KA ? Language.KA : Language.RU;
+        break;
+      case georgianLayout:
+        nextLayout = englishLayout;
+        nextLanguage = Language.EN;
+        break;
+      default:
+        nextLayout = georgianLayout;
+        nextLanguage = Language.KA;
+        break;
+    }
+  
+    return { nextLayout, nextLanguage };
+  };
 
   const setInput = useCallback((value: string) => {
     let updatedInput = state.input;

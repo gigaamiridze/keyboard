@@ -5,12 +5,12 @@ import { KeyboardInput, KeyboardWrapper, FlexBox } from '../components';
 
 function KeyboardWithInput(props: IKeyboardWithInputProps) {
   const [output, setOutput] = useState<string>('');
-  const { mode, styles, inputType, inputMaxLength, onKeyPress } = props;
+  const { mode, styles, language, inputType, inputMaxLength, onKeyPress } = props;
   const keyboardInputMaxLength = inputType === KeyboardInputType.MOBILE_UNDERSCORE ? 9 : inputMaxLength ? inputMaxLength : 4;
 
   const wrappedOnKeyPress = useCallback((value: string) => {
     setOutput(value);
-    onKeyPress && onKeyPress(value)
+    onKeyPress && onKeyPress(value);
   }, [onKeyPress]);
 
   return (
@@ -29,6 +29,7 @@ function KeyboardWithInput(props: IKeyboardWithInputProps) {
       <KeyboardWrapper 
         mode={mode}
         styles={styles}
+        language={language}
         inputMaxLength={keyboardInputMaxLength}
         onKeyPress={wrappedOnKeyPress} 
       />

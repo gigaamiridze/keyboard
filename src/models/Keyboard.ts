@@ -21,7 +21,8 @@ interface InputPropsForKeyboard {
 export interface IKeyboardProps extends IKeyboardStylesProp {
   mode: KeyboardMode;
   onKeyPress?: (value: string) => void;
-  inputMaxLength?: number; 
+  inputMaxLength?: number;
+  language?: Language; 
 }
 
 export interface IKeyboardLayoutProps extends IKeyboardProps {

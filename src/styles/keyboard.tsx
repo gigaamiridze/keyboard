@@ -36,7 +36,7 @@ export const numericKeyboardStyles: IKeyboardStyles = {
       backgroundColor: Colors.LIGHT_BLUE,
       color: Colors.WHITE,
       fontSize: 25,
-      leftIcon: <Icon type='backspace' size={40} color={Colors.WHITE} />,
+      // leftIcon: <Icon type='backspace' size={40} color={Colors.WHITE} />,
     },
   }
 }
@@ -75,7 +75,7 @@ export const qwertyKeyboardStyles: IKeyboardStyles = {
       backgroundColor: Colors.GRAY,
       color: Colors.LIGHT_BLUE,
       fontSize: 23,
-      leftIcon: <Icon type='up-arrow' size={25} color={Colors.LIGHT_BLUE} />,
+      // leftIcon: <Icon type='up-arrow' size={25} color={Colors.LIGHT_BLUE} />,
     },
     symbol: {
       width: 131,
@@ -88,7 +88,7 @@ export const qwertyKeyboardStyles: IKeyboardStyles = {
       backgroundColor: Colors.GRAY,
       color: Colors.LIGHT_BLUE,
       fontSize: 23,
-      leftIcon: <Icon type='globe' size={30} color={Colors.LIGHT_BLUE} />,
+      // leftIcon: <Icon type='globe' size={30} color={Colors.LIGHT_BLUE} />,
     },
     space: {
       width: 294,
@@ -106,7 +106,7 @@ export const qwertyKeyboardStyles: IKeyboardStyles = {
       backgroundColor: Colors.GRAY,
       color: Colors.LIGHT_BLUE,
       fontSize: 23,
-      leftIcon: <Icon type='backspace' size={33} color={Colors.LIGHT_BLUE} />,
+      // leftIcon: <Icon type='backspace' size={33} color={Colors.LIGHT_BLUE} />,
     },
   }
 }
