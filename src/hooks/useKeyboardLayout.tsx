@@ -1,15 +1,17 @@
-import { useEffect, useCallback, useReducer } from 'react';
-import { IButton, IKeyboardState } from '../models';
-import { KeyboardActionType } from '../types';
-import { getLayoutByLanguage } from '../utils';
-import { Language, KeyboardAction } from '../constants';
+import { useEffect, useCallback, useReducer, useState } from 'react';
 import { englishLayout, georgianLayout, russianLayout } from '../utils';
+import { Language, KeyboardAction } from '../constants';
+import { IButton, IKeyboardState } from '../models';
+import { getLayoutByLanguage } from '../utils';
+import { KeyboardActionType } from '../types';
 
-const useKeyboardLayout = (initialLanguage: Language = Language.EN) => {
+const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayoutLanguage: Language | undefined) => {
+  const initialLayout = defaultLayoutLanguage ? getLayoutByLanguage(defaultLayoutLanguage) : getLayoutByLanguage(initialLanguage);
+  
   const initialKeyboardState: IKeyboardState = {
     input: '',
     selectedLanguage: initialLanguage,
-    currentLayout: getLayoutByLanguage(initialLanguage),
+    currentLayout: initialLayout,
     isShiftActive: false,
     isSymbolActive: false,
   }
@@ -25,7 +27,7 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN) => {
       case KeyboardAction.LANGUAGE_CHANGE:
         const { nextLayout, nextLanguage } = handleLanguageChange(state.currentLayout, state.selectedLanguage);
         return { ...state, currentLayout: nextLayout, selectedLanguage: nextLanguage };
-      case KeyboardAction.SET_LAYOUT:
+      case KeyboardAction.SET_LAYOUT_AND_LANGUAGE:
         const { currentLayout, selectedLanguage } = action.payload;
         return { ...state, currentLayout, selectedLanguage };
       case KeyboardAction.SPACE:
@@ -40,14 +42,19 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN) => {
   }, []);
 
   const [state, dispatch] = useReducer(keyboardReducer, initialKeyboardState);
+  const [currentLayoutLanguage, setCurrentLayoutLanguage] = useState<Language | undefined>(undefined);
 
   useEffect(() => {
-    const layout = getLayoutByLanguage(initialLanguage);
-
-    dispatch({ 
-      type: KeyboardAction.SET_LAYOUT, 
-      payload: { currentLayout: layout, selectedLanguage: initialLanguage }, 
-    });
+    if (currentLayoutLanguage === undefined && defaultLayoutLanguage) {
+      setCurrentLayoutLanguage(defaultLayoutLanguage);
+    } else {
+      setCurrentLayoutLanguage(initialLanguage);
+      const layout = getLayoutByLanguage(initialLanguage);
+      dispatch({ 
+        type: KeyboardAction.SET_LAYOUT_AND_LANGUAGE, 
+        payload: { currentLayout: layout, selectedLanguage: initialLanguage }, 
+      });
+    }
   }, [initialLanguage]);
 
   const handleLanguageChange = (currentLayout: IButton[][], selectedLanguage: Language) => {

@@ -24,10 +24,11 @@ function App() {
           <button onClick={() => setLanguage(Language.RU)}>Russian</button>
         </FlexBox>
         <KeyboardWithInput 
-          mode={KeyboardMode.QWERTY_NUMPAD}
+          mode={KeyboardMode.QWERTY}
           styles={qwertyKeyboardStyles}
           language={language}
-          inputType={KeyboardInputType.PASSWORD}
+          defaultLayoutLanguage={Language.EN}
+          inputType={KeyboardInputType.UNDERSCORE}
           inputMaxLength={20}
         />
       </FlexBox>

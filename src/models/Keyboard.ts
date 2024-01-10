@@ -23,6 +23,7 @@ export interface IKeyboardProps extends IKeyboardStylesProp {
   onKeyPress?: (value: string) => void;
   inputMaxLength?: number;
   language?: Language; 
+  defaultLayoutLanguage?: Language;
 }
 
 export interface IKeyboardLayoutProps extends IKeyboardProps {

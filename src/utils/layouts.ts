@@ -9,8 +9,6 @@ export const getLayoutByLanguage = (language: Language) => {
       return georgianLayout;
     case Language.RU:
       return russianLayout;
-    default:
-      return englishLayout;
   }
 }
 

@@ -5,7 +5,7 @@ import { IKeyboardLayoutProps, IQwertyKeyboardHookProps } from '../models';
 import { QwertyKeyboard, NumpadKeyboard, NumericKeyboard, FlexBox } from '../components';
 
 function KeyboardLayout(props: IKeyboardLayoutProps) {
-  const { mode, styles, actionProps, language, inputMaxLength, onKeyPress } = props;
+  const { mode, styles, actionProps, language, defaultLayoutLanguage, inputMaxLength, onKeyPress } = props;
   const { 
     currentLayout, 
     selectedLanguage, 
@@ -19,7 +19,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onSpace, 
     onClean, 
     onDelete 
-  } = useKeyboardLayout(language);
+  } = useKeyboardLayout(language, defaultLayoutLanguage);
   
   useEffect(() => {
     onKeyPress && onKeyPress(input);

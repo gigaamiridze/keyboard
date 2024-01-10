@@ -3,7 +3,7 @@ export enum KeyboardAction {
   SHIFT,
   SYMBOL,
   LANGUAGE_CHANGE,
-  SET_LAYOUT,
+  SET_LAYOUT_AND_LANGUAGE,
   SPACE,
   CLEAN,
   DELETE,
