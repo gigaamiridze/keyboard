@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useReducer, useState } from 'react';
-import { englishLayout, georgianLayout, russianLayout, findKeyByPressedKey, getLayoutByKeyboardMode } from '../utils';
+import { englishLayout, georgianLayout, russianLayout, findKeyByPressedKey, findButtonByPressedKey, getLayoutByKeyboardMode } from '../utils';
 import { Language, KeyboardAction, KeyboardMode } from '../constants';
 import { IButton, IKeyboardState } from '../models';
 import { getLayoutByLanguage } from '../utils';
@@ -47,6 +47,7 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
 
   const [state, dispatch] = useReducer(keyboardReducer, initialKeyboardState);
   const [currentLayoutLanguage, setCurrentLayoutLanguage] = useState<Language | undefined>(undefined);
+  const { input, selectedLanguage, currentLayout, isShiftActive, isSymbolActive } = state;
   const { pressedKey } = useKeyPress();
 
   useEffect(() => {
@@ -112,58 +113,66 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
   };
 
   const setInput = useCallback((value: string | null) => {
-    let updatedInput = state.input;
+    let updatedInput = input;
     updatedInput += value;
     dispatch({ type: KeyboardAction.SET_INPUT, payload: updatedInput });
-  }, [state.input]);
+  }, [input]);
 
   const onShift = useCallback(() => {
     dispatch({ type: KeyboardAction.SHIFT });
-    if (state.isSymbolActive) {
+    if (isSymbolActive) {
       dispatch({ type: KeyboardAction.SYMBOL, payload: false });
     }
-  }, [state.isSymbolActive]);
+  }, [isSymbolActive]);
 
   const onSymbol = useCallback(() => {
     dispatch({ type: KeyboardAction.SYMBOL });
-    if (state.isShiftActive) {
+    if (isShiftActive) {
       dispatch({ type: KeyboardAction.SHIFT, payload: false });
     }
-  }, [state.isShiftActive]);
+  }, [isShiftActive]);
 
   const onLanguageChange = useCallback(() => {
     dispatch({ type: KeyboardAction.LANGUAGE_CHANGE });
   }, []);
 
   const onSpace = useCallback(() => {
-    let updatedInput = state.input;
+    let updatedInput = input;
     updatedInput += ' ';
     dispatch({ type: KeyboardAction.SPACE, payload: updatedInput });
-  }, [state.input]);
+  }, [input]);
 
   const onClean = useCallback(() => {
-    if (state.input.length > 0) {
+    if (input.length > 0) {
       dispatch({ type: KeyboardAction.CLEAN });
     }
-  }, [state.input]);
+  }, [input]);
 
   const onDelete = useCallback(() => {
-    if (state.input.length > 0) {
+    if (input.length > 0) {
       dispatch({ type: KeyboardAction.DELETE });
     }
-  }, [state.input]);
+  }, [input]);
 
   const onKeyPress = useCallback(() => {
-    const key = findKeyByPressedKey(state.currentLayout, pressedKey);
+    const button = findButtonByPressedKey(currentLayout, pressedKey);
+    const key = findKeyByPressedKey(currentLayout, pressedKey);
 
-    if (key && isInputLengthValid()) {
-      setInput(key);
+    if (button && key && isInputLengthValid()) {
+      setInput(getInputValue(button, key));
     }
-  }, [pressedKey, state.currentLayout, state.input, inputMaxLength]);
+  }, [pressedKey, currentLayout]);
 
-  const isInputLengthValid = () => {
-    return state.input.length !== inputMaxLength;
-  };
+  const isInputLengthValid = useCallback(() => {
+    return input.length !== inputMaxLength;
+  }, [input, inputMaxLength]);
+
+  const getInputValue = useCallback((button: IButton, key: string) => {
+    const shiftValue = key === button.symbolValue ? button.symbolValue : button.shiftValue;
+    const regularValue = key === button.shiftValue ? button.value : key === button.symbolValue ? button.symbolValue : button.label;
+
+    return isShiftActive ? shiftValue : regularValue;
+  }, [isShiftActive]);
 
   return { 
     ...state,
