@@ -1,13 +1,17 @@
 import { useEffect, useCallback, useReducer, useState } from 'react';
-import { englishLayout, georgianLayout, russianLayout } from '../utils';
-import { Language, KeyboardAction } from '../constants';
+import { englishLayout, georgianLayout, russianLayout, findKeyByPressedKey, getLayoutByKeyboardMode } from '../utils';
+import { Language, KeyboardAction, KeyboardMode } from '../constants';
 import { IButton, IKeyboardState } from '../models';
 import { getLayoutByLanguage } from '../utils';
 import { KeyboardActionType } from '../types';
+import { useKeyPress } from '../hooks';
 
-const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayoutLanguage: Language | undefined) => {
-  const initialLayout = defaultLayoutLanguage ? getLayoutByLanguage(defaultLayoutLanguage) : getLayoutByLanguage(initialLanguage);
-  
+const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayoutLanguage?: Language, inputMaxLength?: number, keyboardMode?: KeyboardMode) => {
+  const initialLayout = defaultLayoutLanguage 
+    ? getLayoutByLanguage(defaultLayoutLanguage) 
+    : keyboardMode ? getLayoutByKeyboardMode(keyboardMode, initialLanguage) 
+    : getLayoutByLanguage(initialLanguage); 
+
   const initialKeyboardState: IKeyboardState = {
     input: '',
     selectedLanguage: initialLanguage,
@@ -21,9 +25,9 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
       case KeyboardAction.SET_INPUT:
         return { ...state, input: action.payload };
       case KeyboardAction.SHIFT:
-        return { ...state, isShiftActive: !state.isShiftActive };
+        return { ...state, isShiftActive: action.payload ? action.payload : !state.isShiftActive };
       case KeyboardAction.SYMBOL:
-        return { ...state, isSymbolActive: !state.isSymbolActive };
+        return { ...state, isSymbolActive: action.payload ? action.payload : !state.isSymbolActive };
       case KeyboardAction.LANGUAGE_CHANGE:
         const { nextLayout, nextLanguage } = handleLanguageChange(state.currentLayout, state.selectedLanguage);
         return { ...state, currentLayout: nextLayout, selectedLanguage: nextLanguage };
@@ -43,11 +47,12 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
 
   const [state, dispatch] = useReducer(keyboardReducer, initialKeyboardState);
   const [currentLayoutLanguage, setCurrentLayoutLanguage] = useState<Language | undefined>(undefined);
+  const { pressedKey } = useKeyPress();
 
   useEffect(() => {
     if (currentLayoutLanguage === undefined && defaultLayoutLanguage) {
       setCurrentLayoutLanguage(defaultLayoutLanguage);
-    } else {
+    } else if (currentLayoutLanguage) {
       setCurrentLayoutLanguage(initialLanguage);
       const layout = getLayoutByLanguage(initialLanguage);
       dispatch({ 
@@ -56,6 +61,33 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
       });
     }
   }, [initialLanguage]);
+
+  useEffect(() => {
+    switch (pressedKey) {
+      case 'Shift':
+        onShift();
+        break;
+      case 'CapsLock':
+        onSymbol();
+        break;
+      case 'Delete':
+      case 'Backspace':
+        onDelete();
+        break;
+      case 'Escape':
+        onClean();
+        break;
+      case 'Control':
+        onLanguageChange();
+        break;
+      case ' ':
+        onSpace();
+        break;
+      default:
+        onKeyPress();
+        break;
+    }
+  }, [pressedKey]);
 
   const handleLanguageChange = (currentLayout: IButton[][], selectedLanguage: Language) => {
     let nextLayout;
@@ -79,7 +111,7 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
     return { nextLayout, nextLanguage };
   };
 
-  const setInput = useCallback((value: string) => {
+  const setInput = useCallback((value: string | null) => {
     let updatedInput = state.input;
     updatedInput += value;
     dispatch({ type: KeyboardAction.SET_INPUT, payload: updatedInput });
@@ -87,11 +119,17 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
 
   const onShift = useCallback(() => {
     dispatch({ type: KeyboardAction.SHIFT });
-  }, []);
+    if (state.isSymbolActive) {
+      dispatch({ type: KeyboardAction.SYMBOL, payload: false });
+    }
+  }, [state.isSymbolActive]);
 
   const onSymbol = useCallback(() => {
     dispatch({ type: KeyboardAction.SYMBOL });
-  }, []);
+    if (state.isShiftActive) {
+      dispatch({ type: KeyboardAction.SHIFT, payload: false });
+    }
+  }, [state.isShiftActive]);
 
   const onLanguageChange = useCallback(() => {
     dispatch({ type: KeyboardAction.LANGUAGE_CHANGE });
@@ -114,6 +152,18 @@ const useKeyboardLayout = (initialLanguage: Language = Language.EN, defaultLayou
       dispatch({ type: KeyboardAction.DELETE });
     }
   }, [state.input]);
+
+  const onKeyPress = useCallback(() => {
+    const key = findKeyByPressedKey(state.currentLayout, pressedKey);
+
+    if (key && isInputLengthValid()) {
+      setInput(key);
+    }
+  }, [pressedKey, state.currentLayout, state.input, inputMaxLength]);
+
+  const isInputLengthValid = () => {
+    return state.input.length !== inputMaxLength;
+  };
 
   return { 
     ...state,

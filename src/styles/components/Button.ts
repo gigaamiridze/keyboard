@@ -64,7 +64,7 @@ export const Button = styled.button<IButtonProps>`
 
     ${isActive && css`
       transform: translateY(1px);
-      background-color: ${Colors.GRAY};
+      background-color: ${Colors.DARK_GRAY};
       transform: scale(0.98);
     `}
 

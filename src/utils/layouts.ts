@@ -1,4 +1,4 @@
-import { Language } from '../constants';
+import { Language, KeyboardMode } from '../constants';
 import keys from './keys';
 
 export const getLayoutByLanguage = (language: Language) => {
@@ -9,6 +9,20 @@ export const getLayoutByLanguage = (language: Language) => {
       return georgianLayout;
     case Language.RU:
       return russianLayout;
+  }
+}
+
+export const getLayoutByKeyboardMode = (keyboardMode: KeyboardMode, language: Language) => {
+  switch (keyboardMode) {
+    case KeyboardMode.QWERTY:
+    case KeyboardMode.QWERTY_NUMPAD:
+      const layout = getLayoutByLanguage(language);
+      return layout;
+    case KeyboardMode.NUMERIC:
+    case KeyboardMode.NUMERIC_DOT:
+      return numericLayout;
+    default:
+      return englishLayout;
   }
 }
 

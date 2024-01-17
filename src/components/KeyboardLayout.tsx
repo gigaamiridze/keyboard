@@ -19,7 +19,7 @@ function KeyboardLayout(props: IKeyboardLayoutProps) {
     onSpace, 
     onClean, 
     onDelete 
-  } = useKeyboardLayout(language, defaultLayoutLanguage);
+  } = useKeyboardLayout(language, defaultLayoutLanguage, inputMaxLength, mode);
   
   useEffect(() => {
     onKeyPress && onKeyPress(input);

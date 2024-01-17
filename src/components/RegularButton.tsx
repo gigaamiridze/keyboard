@@ -10,8 +10,8 @@ function RegularButton(props: IRegularButtonProps) {
   return (
     <Button
       styles={styles} 
-      onClick={() => onPress(valueToPass)}
       disabled={disabled}
+      onClick={() => onPress(valueToPass)}
     >
       {labelToRender}
     </Button>

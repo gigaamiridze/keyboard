@@ -29,7 +29,7 @@ function App() {
           language={language}
           defaultLayoutLanguage={Language.EN}
           inputType={KeyboardInputType.UNDERSCORE}
-          inputMaxLength={20}
+          inputMaxLength={10}
         />
       </FlexBox>
     </StyleSheetManager>
